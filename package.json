@@ -1,5 +1,6 @@
 {
     "name": "tickr_common",
+    "version": "1.0.0",
     "scripts": {
       "lint": "tslint --project tsconfig.json",
       "build": "tsc"
