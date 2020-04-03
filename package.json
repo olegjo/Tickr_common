@@ -1,0 +1,19 @@
+{
+    "name": "tickr_common",
+    "scripts": {
+      "lint": "tslint --project tsconfig.json",
+      "build": "tsc"
+    },
+    "engines": {
+      "node": "8"
+    },
+    "main": "index.ts",
+    "dependencies": {
+    },
+    "devDependencies": {
+      "tslint": "^5.20.1",
+      "typescript": "^3.7.4"
+    },
+    "private": true
+  }
+  

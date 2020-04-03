@@ -1,0 +1,56 @@
+import { ClimbingGradeBase } from "./ClimbingGradeBase";
+import { ClimbingGradeSystem } from "./ClimbingGradeSystem";
+
+const grades = [ "< 3-", "3-", "3", "3+", "4-", "4", "4+", "5-", "5", "5+", "6-", "6", "6+", "7-", "7", "7/7+", "7+", "7+/8-", "8-", "8", "8/8+", "8+", "9-", "9-/9", "9", "9/9+", "9+", "8c+", "9a", "9a+", "9b", "9b+", "9c", "9c+" ] as const;
+export type NorwegianGradeValue = typeof grades[number];
+
+export class NorwegianClimbingGrade extends ClimbingGradeBase<NorwegianGradeValue> {
+    constructor(value: NorwegianGradeValue, numericValueRange: [number, number], color: string) {
+        super(value, numericValueRange, color);
+    }
+
+    get gradeSystemName() {
+        return "NorwegianClimbingGrade";
+    }
+}
+
+export class NorwegianClimbingGradeSystem extends ClimbingGradeSystem<NorwegianGradeValue, NorwegianClimbingGrade> {
+    constructor() {
+        super([
+            new NorwegianClimbingGrade("< 3-",  [ 0, 2 ],    "#ffffff"),
+            new NorwegianClimbingGrade("3-",    [ 2, 6 ],    "#ffffff"),
+            new NorwegianClimbingGrade("3",     [ 6, 10 ],   "#ffffff"),
+            new NorwegianClimbingGrade("3+",    [ 10, 14 ],  "#ffffff"),
+            new NorwegianClimbingGrade("4-",    [ 14, 18 ],  "#00ff00"),
+            new NorwegianClimbingGrade("4",     [ 18, 22 ],  "#00ff00"),
+            new NorwegianClimbingGrade("4+",    [ 22, 26 ],  "#00ff00"),
+            new NorwegianClimbingGrade("5-",    [ 26, 30 ],  "#0000ff"),
+            new NorwegianClimbingGrade("5",     [ 30, 34 ],  "#0000ff"),
+            new NorwegianClimbingGrade("5+",    [ 34, 38 ],  "#0000ff"),
+            new NorwegianClimbingGrade("6-",    [ 38, 42 ],  "#ffff00"),
+            new NorwegianClimbingGrade("6",     [ 42, 46 ],  "#ffff00"),
+            new NorwegianClimbingGrade("6+",    [ 46, 50 ],  "#ffff00"),
+            new NorwegianClimbingGrade("7-",    [ 50, 54 ],  "#ff0000"),
+            new NorwegianClimbingGrade("7",     [ 54, 58 ],  "#ff0000"),
+            new NorwegianClimbingGrade("7/7+",  [ 58, 58 ],  "#ff0000"),
+            new NorwegianClimbingGrade("7+",    [ 58, 62 ],  "#ff0000"),
+            new NorwegianClimbingGrade("7+/8-", [ 62, 62 ],  "#ff0000"),
+            new NorwegianClimbingGrade("8-",    [ 62, 66 ],  "#000000"),
+            new NorwegianClimbingGrade("8",     [ 66, 70 ],  "#000000"),
+            new NorwegianClimbingGrade("8/8+",  [ 70, 70 ],  "#000000"),
+            new NorwegianClimbingGrade("8+",    [ 70, 74 ],  "#000000"),
+            new NorwegianClimbingGrade("9-",    [ 74, 78 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9-/9",  [ 78, 78 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9",     [ 78, 82 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9/9+",  [ 82, 82 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9+",    [ 82, 86 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("8c+",   [ 86, 86 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9a",    [ 86, 90 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9a+",   [ 90, 90 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9b",    [ 90, 94 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9b+",   [ 94, 94 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9c",    [ 94, 98 ],  "#C0C0C0"),
+            new NorwegianClimbingGrade("9c+",   [ 98, 100 ], "#C0C0C0"),
+        ]);
+    }
+}
