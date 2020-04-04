@@ -20,6 +20,10 @@ export class BarChartData {
         }
     }
 
+    public getData() {
+        return this.data;
+    }
+
     public toFirestore() {
         return this.data;
     }

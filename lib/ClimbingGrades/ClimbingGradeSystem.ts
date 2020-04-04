@@ -11,8 +11,8 @@ export abstract class ClimbingGradeSystem<U = any, T extends ClimbingGradeBase<U
         return this.grades.length > 0 ? this.grades[0].gradeSystemName : "";
     }
 
-    public find(value: U): T | undefined {
-        return this.grades.find((grade) => grade.getValue() === value);
+    public find(label: U): T | undefined {
+        return this.grades.find((grade) => grade.getLabel() === label);
     }
 
     public findClosestByNumericValue(value: number): T {

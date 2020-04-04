@@ -1,9 +1,9 @@
 export abstract class ClimbingGradeBase<T> {
-    protected value: T;
+    protected label: T;
     protected numericValueRange: [number, number];
     protected color: string;
-    constructor(value: T, numericValueRange: [number, number], color: string) {
-        this.value = value;
+    constructor(label: T, numericValueRange: [number, number], color: string) {
+        this.label = label;
         this.numericValueRange = numericValueRange;
         this.color = color;
     }
@@ -16,8 +16,12 @@ export abstract class ClimbingGradeBase<T> {
         return this.numericValueRange;
     }
 
-    public getValue(): T {
-        return this.value;
+    public getLabel(): T {
+        return this.label;
+    }
+
+    public getColor() {
+        return this.color;
     }
 
     abstract get gradeSystemName(): string;
@@ -25,7 +29,7 @@ export abstract class ClimbingGradeBase<T> {
     public toFirestore(): { type: string; grade: T; } {
         return {
             type: this.gradeSystemName,
-            grade: this.value
-        }
+            grade: this.label
+        };
     }
 }

@@ -67,7 +67,7 @@ export class Route {
 
     public setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>) {
         if (grade) {
-            if (grade.getValue() !== this.grade.getValue()) {
+            if (grade.getLabel() !== this.grade.getLabel()) {
                 console.log("Grade value updated.");
             }
             this.grade = grade;
