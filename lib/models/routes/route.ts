@@ -28,14 +28,14 @@ interface IAverageData {
 export class Route {
     public gradeOpinionChartData: BarChartData;
     public averageGradeData?: IAverageData;
-
-    private name: string;
-    private type: "route" | "boulder";
-    private sector: ISector;
-    private routeSetter: IRouteSetter;
-    private gym: IGym;
-    private grade: ClimbingGrades.ClimbingGradeBase<any>;
+    public name: string;
+    public grade: ClimbingGrades.ClimbingGradeBase<any>;
     
+    private _routeSetter: IRouteSetter;
+    private _sector: ISector;
+    
+    readonly gym: IGym;
+    readonly type: "route" | "boulder";
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
 
@@ -44,10 +44,10 @@ export class Route {
         this.type = data.type;
         if (this.type === "route" && !this.name) throw new Error("Invalid argument.");
 
-        this.sector = data.sector;
-        this.routeSetter = data.routeSetter;
+        this._sector = data.sector;
+        this._routeSetter = data.routeSetter;
         this.gym = data.gym;
-        if (!this.sector || !this.routeSetter || !this.gym) throw new Error("Invalid argument.");
+        if (!this._sector || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
 
         this.gradeOpinionChartData = new BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
@@ -78,8 +78,8 @@ export class Route {
         return {
             name: this.name,
             type: this.type,
-            sector: this.sector,
-            routeSetter: this.routeSetter,
+            sector: this._sector,
+            routeSetter: this._routeSetter,
             gym: this.gym,
             difficulty: this.grade.toFirestore(),
             originalDifficulty: this.originalGrade.toFirestore(),
@@ -87,7 +87,7 @@ export class Route {
             averageGradeData: this.averageGradeData,
         };
     }
-    
+
     static toFirestore(data: Route): DocumentData {
         return data.toFirestore();
     }
