@@ -1,4 +1,4 @@
-export * from "./lib/BarChartData";
-export * as ClimbingGrades from "./lib/ClimbingGrades";
-export * from "./lib/models/TickData";
-export * from "./lib/models/routes/route";
+export * from "./src/BarChartData";
+export * as ClimbingGrades from "./src/ClimbingGrades";
+export * from "./src/models/TickData";
+export * from "./src/models/routes/route";

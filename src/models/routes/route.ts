@@ -38,6 +38,10 @@ export class Route {
     readonly type: "route" | "boulder";
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
+    readonly tickCountFlash: number = 0;
+    readonly tickCountRedpoint: number = 0;
+    readonly tickCountToprope: number = 0;
+    readonly tickCountOnsight: number = 0;
 
     constructor(data: any) {
         this.name = data.name;
@@ -63,6 +67,11 @@ export class Route {
         else this.originalGrade = this.grade;
 
         this.averageGradeData = data.averageGradeData;
+
+        this.tickCountFlash = data.tickCountFlash;
+        this.tickCountOnsight = data.tickCountOnsight;
+        this.tickCountRedpoint = data.tickCountRedpoint;
+        this.tickCountToprope = data.tickCountToprope;
     }
 
     public setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>) {
@@ -85,6 +94,10 @@ export class Route {
             originalDifficulty: this.originalGrade.toFirestore(),
             gradeOpinionBarChart: this.gradeOpinionChartData.toFirestore(),
             averageGradeData: this.averageGradeData,
+            tickCountFlash: this.tickCountFlash,
+            tickCountOnsight: this.tickCountOnsight,
+            tickCountRedpoint: this.tickCountRedpoint,
+            tickCountToprope: this.tickCountToprope
         };
     }
 
@@ -94,5 +107,13 @@ export class Route {
     
     static fromFirestore(data: DocumentData): Route {
         return new Route(data);
+    }
+
+    get sector() {
+        return this._sector;
+    }
+
+    get routeSetter() {
+        return this._routeSetter;
     }
 }
