@@ -11,6 +11,14 @@ export abstract class ClimbingGradeSystem<U = any, T extends ClimbingGradeBase<U
         return this.grades.length > 0 ? this.grades[0].gradeSystemName : "";
     }
 
+    get length() {
+        return this.grades.length;
+    }
+
+    public at(index: number): T {
+        return this.grades[index];
+    }
+
     public find(label: U): T | undefined {
         return this.grades.find((grade) => grade.getLabel() === label);
     }

@@ -83,7 +83,7 @@ export class Route {
         }
     }
 
-    public toFirestore(): DocumentData {
+    public toFirestore() {
         return {
             name: this.name,
             type: this.type,

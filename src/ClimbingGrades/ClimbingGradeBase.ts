@@ -1,4 +1,4 @@
-export abstract class ClimbingGradeBase<T> {
+export abstract class ClimbingGradeBase<T = string> {
     protected label: T;
     protected numericValueRange: [number, number];
     protected color: string;

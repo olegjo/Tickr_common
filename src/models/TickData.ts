@@ -1,6 +1,13 @@
 const ascentStyles = [ "toprope", "flash", "redpoint", "onsight" ] as const;
 export type AscentStyle = typeof ascentStyles[number];
 
+export interface IPostTickData {
+    style: AscentStyle;
+    routeId: string;
+    rating?: number;
+    gradeOpinion?: string;
+}
+
 export class TickData {
     public style: AscentStyle;
     public routeId?: string;
