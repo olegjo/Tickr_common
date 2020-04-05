@@ -8,11 +8,12 @@
   "engines": {
     "node": "8"
   },
-  "main": "index.ts",
+  "main": "dist/index.js",
   "dependencies": {},
   "devDependencies": {
     "tslint": "^5.20.1",
     "typescript": "^3.7.4"
   },
-  "private": true
+  "private": true,
+  "types": "dist/index.d.ts"
 }

@@ -3,7 +3,7 @@ function isDefined(v: any) {
     return v !== undefined && v !== null;
 }
 
-interface IBarChartDataItem {
+export interface IBarChartDataItem {
     label: string;
     value: number;
 }

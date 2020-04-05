@@ -1,0 +1,81 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const BarChartData_1 = require("../../BarChartData");
+const ClimbingGrades = require("../../ClimbingGrades");
+;
+;
+;
+class Route {
+    constructor(data) {
+        var _a, _b, _c;
+        this.tickCountFlash = 0;
+        this.tickCountRedpoint = 0;
+        this.tickCountToprope = 0;
+        this.tickCountOnsight = 0;
+        this.name = data.name;
+        this.type = data.type;
+        if (this.type === "route" && !this.name)
+            throw new Error("Invalid argument.");
+        this._sector = data.sector;
+        this._routeSetter = data.routeSetter;
+        this.gym = data.gym;
+        if (!this._sector || !this._routeSetter || !this.gym)
+            throw new Error("Invalid argument.");
+        this.gradeOpinionChartData = new BarChartData_1.BarChartData();
+        this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
+        this.gradeSystem = ClimbingGrades.getGradeSystem((_a = data.difficulty) === null || _a === void 0 ? void 0 : _a.type);
+        const grade = this.gradeSystem.find((_b = data.difficulty) === null || _b === void 0 ? void 0 : _b.grade);
+        if (!grade)
+            throw new Error("Invalid argument");
+        this.grade = grade;
+        const originalGrade = this.gradeSystem.find((_c = data.originalDifficulty) === null || _c === void 0 ? void 0 : _c.grade);
+        if (originalGrade)
+            this.originalGrade = originalGrade;
+        else
+            this.originalGrade = this.grade;
+        this.averageGradeData = data.averageGradeData;
+        this.tickCountFlash = data.tickCountFlash;
+        this.tickCountOnsight = data.tickCountOnsight;
+        this.tickCountRedpoint = data.tickCountRedpoint;
+        this.tickCountToprope = data.tickCountToprope;
+    }
+    setNewGrade(grade) {
+        if (grade) {
+            if (grade.getLabel() !== this.grade.getLabel()) {
+                console.log("Grade value updated.");
+            }
+            this.grade = grade;
+        }
+    }
+    toFirestore() {
+        return {
+            name: this.name,
+            type: this.type,
+            sector: this._sector,
+            routeSetter: this._routeSetter,
+            gym: this.gym,
+            difficulty: this.grade.toFirestore(),
+            originalDifficulty: this.originalGrade.toFirestore(),
+            gradeOpinionBarChart: this.gradeOpinionChartData.toFirestore(),
+            averageGradeData: this.averageGradeData,
+            tickCountFlash: this.tickCountFlash,
+            tickCountOnsight: this.tickCountOnsight,
+            tickCountRedpoint: this.tickCountRedpoint,
+            tickCountToprope: this.tickCountToprope
+        };
+    }
+    static toFirestore(data) {
+        return data.toFirestore();
+    }
+    static fromFirestore(data) {
+        return new Route(data);
+    }
+    get sector() {
+        return this._sector;
+    }
+    get routeSetter() {
+        return this._routeSetter;
+    }
+}
+exports.Route = Route;
+//# sourceMappingURL=route.js.map
