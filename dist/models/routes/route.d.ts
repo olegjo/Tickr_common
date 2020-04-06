@@ -19,6 +19,20 @@ interface IAverageData {
     n: number;
     total: number;
 }
+declare const routeTypes: readonly ["route", "boulder"];
+declare type RouteType = typeof routeTypes[number];
+export interface IPostRouteData {
+    type: RouteType;
+    name?: string;
+    grade: ClimbingGrades.IFirestoreClimbingGrade;
+    gymId: string;
+    sectorId: string;
+    routesetter: {
+        userId: string;
+        name: string;
+    };
+}
+export declare function validatePostRouteData(data: IPostRouteData): boolean;
 export declare class Route {
     gradeOpinionChartData: BarChartData;
     averageGradeData?: IAverageData;
@@ -27,7 +41,7 @@ export declare class Route {
     private _routeSetter;
     private _sector;
     readonly gym: IGym;
-    readonly type: "route" | "boulder";
+    readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
     readonly tickCountFlash: number;

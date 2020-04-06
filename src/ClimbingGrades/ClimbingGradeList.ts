@@ -1,6 +1,6 @@
 import { ClimbingGradeBase } from "./ClimbingGradeBase";
 
-export class ClimbingGradeList<U = any, T extends ClimbingGradeBase<U> = ClimbingGradeBase<any>> {
+export class ClimbingGradeList<U extends string = string, T extends ClimbingGradeBase<U> = ClimbingGradeBase<any>> {
     private grades: T[] = [];
 
     public push(value: T) {

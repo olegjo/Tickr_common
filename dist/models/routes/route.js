@@ -5,6 +5,31 @@ const ClimbingGrades = require("../../ClimbingGrades");
 ;
 ;
 ;
+const routeTypes = ["route", "boulder"];
+function validatePostRouteData(data) {
+    var _a, _b, _c;
+    if (!data)
+        return false;
+    if (!routeTypes.includes(data.type))
+        return false;
+    ;
+    if (data.type === "route") {
+        if (typeof (data.name) !== "string")
+            return false;
+        if (((_a = data.name) === null || _a === void 0 ? void 0 : _a.length) <= 0)
+            return false;
+    }
+    if (typeof (data.gymId) !== "string")
+        return false;
+    if (((_b = data.gymId) === null || _b === void 0 ? void 0 : _b.length) <= 0)
+        return false;
+    if (typeof (data.sectorId) !== "string")
+        return false;
+    if (((_c = data.sectorId) === null || _c === void 0 ? void 0 : _c.length) <= 0)
+        return false;
+    return true;
+}
+exports.validatePostRouteData = validatePostRouteData;
 class Route {
     constructor(data) {
         var _a, _b, _c;

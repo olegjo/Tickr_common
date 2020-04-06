@@ -1,6 +1,6 @@
 import { ClimbingGradeBase } from "./ClimbingGradeBase";
 
-export abstract class ClimbingGradeSystem<U = any, T extends ClimbingGradeBase<U> = ClimbingGradeBase<U>> {
+export abstract class ClimbingGradeSystem<U extends string = string, T extends ClimbingGradeBase<U> = ClimbingGradeBase<U>> {
     protected grades: T[] = [];
 
     constructor(grades: T[]) {
