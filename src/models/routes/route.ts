@@ -25,6 +25,40 @@ interface IAverageData {
     total: number;
 }
 
+const routeTypes = [ "route", "boulder" ] as const;
+type RouteType = typeof routeTypes[number];
+
+export interface IPostRouteData {
+    type: RouteType;
+    name?: string;
+    grade: ClimbingGrades.IFirestoreClimbingGrade;
+    gymId: string;
+    sectorId: string;
+    routesetter: {
+        userId: string;
+        name: string;
+    };
+}
+
+export function validatePostRouteData(data: IPostRouteData): boolean {
+    if (!data) return false;
+
+    if (!routeTypes.includes(data.type)) return false;;
+
+    if (data.type === "route") {
+        if (typeof(data.name) !== "string") return false;
+        if (data.name?.length <= 0) return false;
+    }
+
+    if (typeof(data.gymId) !== "string") return false;
+    if (data.gymId?.length <= 0) return false;
+
+    if (typeof(data.sectorId) !== "string") return false;
+    if (data.sectorId?.length <= 0) return false;
+
+    return true;
+}
+
 export class Route {
     public gradeOpinionChartData: BarChartData;
     public averageGradeData?: IAverageData;
@@ -35,7 +69,7 @@ export class Route {
     private _sector: ISector;
     
     readonly gym: IGym;
-    readonly type: "route" | "boulder";
+    readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
     readonly tickCountFlash: number = 0;
