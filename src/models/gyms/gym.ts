@@ -9,7 +9,8 @@ export interface IOpeningHours {
 export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
-    
+    gradeSystem: string;
+
     gradeDistributionBarChartData?: {
         routes: IBarChartDataItem[],
         boulders: IBarChartDataItem[],
@@ -21,9 +22,10 @@ export class Gym {
     public gradeBarChartDataBoulders: BarChartData;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
+    readonly gradeSystem: string;
 
     constructor(data: IGymData) {
-        if (!data.name || !data.openingHours) {
+        if (!data.name || !data.openingHours || !data.gradeSystem) {
             throw new Error("Invalid argument");
         }
 
@@ -36,12 +38,14 @@ export class Gym {
         this.gradeBarChartDataBoulders.fromFirestore(data.gradeDistributionBarChartData?.boulders);
 
         this.openingHours = data.openingHours;
+        this.gradeSystem = data.gradeSystem;
     }
 
     public toFirestore(): IGymData {
         return {
             name: this.name,
             openingHours: this.openingHours,
+            gradeSystem: this.gradeSystem,
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
                 routes: this.gradeBarChartDataRoutes.toFirestore(),
