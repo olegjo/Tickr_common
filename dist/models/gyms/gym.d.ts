@@ -1,3 +1,4 @@
+import { DocumentData } from "../../firestore_types";
 import { BarChartData } from "../../BarChartData";
 export interface IOpeningHours {
     days: string;
@@ -13,6 +14,6 @@ export declare class Gym {
         openingHours: IOpeningHours[];
         gradeBarChartData: import("../../BarChartData").IBarChartDataItem[];
     };
-    static toFirestore(data: Gym): any;
-    static fromFirestore(data: any): Gym;
+    static toFirestore(data: Gym): DocumentData;
+    static fromFirestore(data: DocumentData): Gym;
 }

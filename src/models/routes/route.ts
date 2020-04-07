@@ -1,9 +1,6 @@
+import { DocumentData } from "../../firestore_types";
 import { BarChartData } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
-
-type DocumentData = {
-    [field: string]: any;
-};
 
 interface ISector {
     id: string;
