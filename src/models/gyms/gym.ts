@@ -18,7 +18,7 @@ export class Gym {
         this.name = data.name;
 
         this.gradeBarChartData = new BarChartData();
-        this.gradeBarChartData.fromFirestore(data.gradeOpinionBarChart);
+        this.gradeBarChartData.fromFirestore(data.gradeBarChartData);
 
         this.openingHours = data.openingHours;
     }
