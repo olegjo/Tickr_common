@@ -6,5 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./BarChartData"));
 __export(require("./ClimbingGrades"));
 __export(require("./models/TickData"));
-__export(require("./models/routes/route"));
+const models = require("./models");
+exports.models = models;
 //# sourceMappingURL=index.js.map
