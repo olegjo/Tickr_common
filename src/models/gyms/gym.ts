@@ -22,4 +22,20 @@ export class Gym {
 
         this.openingHours = data.openingHours;
     }
+
+    public toFirestore() {
+        return {
+            name: this.name,
+            openingHours: this.openingHours,
+            gradeBarChartData: this.gradeBarChartData.toFirestore()
+        };
+    }
+
+    static toFirestore(data: Gym): any {
+        return data.toFirestore();
+    }
+    
+    static fromFirestore(data: any): Gym {
+        return new Gym(data);
+    }
 }

@@ -8,4 +8,11 @@ export declare class Gym {
     readonly name: string;
     readonly openingHours: IOpeningHours[];
     constructor(data: any);
+    toFirestore(): {
+        name: string;
+        openingHours: IOpeningHours[];
+        gradeBarChartData: import("../../BarChartData").IBarChartDataItem[];
+    };
+    static toFirestore(data: Gym): any;
+    static fromFirestore(data: any): Gym;
 }

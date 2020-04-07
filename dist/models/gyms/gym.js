@@ -11,6 +11,19 @@ class Gym {
         this.gradeBarChartData.fromFirestore(data.gradeBarChartData);
         this.openingHours = data.openingHours;
     }
+    toFirestore() {
+        return {
+            name: this.name,
+            openingHours: this.openingHours,
+            gradeBarChartData: this.gradeBarChartData.toFirestore()
+        };
+    }
+    static toFirestore(data) {
+        return data.toFirestore();
+    }
+    static fromFirestore(data) {
+        return new Gym(data);
+    }
 }
 exports.Gym = Gym;
 //# sourceMappingURL=gym.js.map
