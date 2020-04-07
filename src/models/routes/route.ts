@@ -132,7 +132,7 @@ export class Route {
     }
 
     public toFirestore(): IRouteData {
-        return {
+        let ret = {
             name: this.name,
             type: this.type,
             sector: this._sector,
@@ -147,6 +147,8 @@ export class Route {
             tickCountRedpoint: this.tickCountRedpoint,
             tickCountToprope: this.tickCountToprope
         };
+        
+        return ret;
     }
 
     static toFirestore(data: Route): DocumentData {

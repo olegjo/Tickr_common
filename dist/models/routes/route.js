@@ -73,7 +73,7 @@ class Route {
         }
     }
     toFirestore() {
-        return {
+        let ret = {
             name: this.name,
             type: this.type,
             sector: this._sector,
@@ -88,6 +88,7 @@ class Route {
             tickCountRedpoint: this.tickCountRedpoint,
             tickCountToprope: this.tickCountToprope
         };
+        return ret;
     }
     static toFirestore(data) {
         return data.toFirestore();

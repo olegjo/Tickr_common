@@ -9,7 +9,8 @@ export interface IOpeningHours {
 export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
-    gradeDistributionBarChartData: {
+    
+    gradeDistributionBarChartData?: {
         routes: IBarChartDataItem[],
         boulders: IBarChartDataItem[],
     };
@@ -29,10 +30,10 @@ export class Gym {
         this.name = data.name;
 
         this.gradeBarChartDataRoutes = new BarChartData();
-        this.gradeBarChartDataRoutes.fromFirestore(data.gradeDistributionBarChartData.routes);
+        this.gradeBarChartDataRoutes.fromFirestore(data.gradeDistributionBarChartData?.routes);
 
         this.gradeBarChartDataBoulders = new BarChartData();
-        this.gradeBarChartDataBoulders.fromFirestore(data.gradeDistributionBarChartData.boulders);
+        this.gradeBarChartDataBoulders.fromFirestore(data.gradeDistributionBarChartData?.boulders);
 
         this.openingHours = data.openingHours;
     }

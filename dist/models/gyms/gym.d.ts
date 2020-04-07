@@ -7,7 +7,7 @@ export interface IOpeningHours {
 export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
-    gradeDistributionBarChartData: {
+    gradeDistributionBarChartData?: {
         routes: IBarChartDataItem[];
         boulders: IBarChartDataItem[];
     };
