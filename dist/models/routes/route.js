@@ -32,7 +32,7 @@ function validatePostRouteData(data) {
 exports.validatePostRouteData = validatePostRouteData;
 class Route {
     constructor(data) {
-        var _a, _b, _c;
+        var _a, _b;
         this.tickCountFlash = 0;
         this.tickCountRedpoint = 0;
         this.tickCountToprope = 0;
@@ -48,21 +48,21 @@ class Route {
             throw new Error("Invalid argument.");
         this.gradeOpinionChartData = new BarChartData_1.BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
-        this.gradeSystem = ClimbingGrades.getGradeSystem((_a = data.difficulty) === null || _a === void 0 ? void 0 : _a.type);
-        const grade = this.gradeSystem.find((_b = data.difficulty) === null || _b === void 0 ? void 0 : _b.grade);
+        this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty.type);
+        const grade = this.gradeSystem.find((_a = data.difficulty) === null || _a === void 0 ? void 0 : _a.grade);
         if (!grade)
             throw new Error("Invalid argument");
         this.grade = grade;
-        const originalGrade = this.gradeSystem.find((_c = data.originalDifficulty) === null || _c === void 0 ? void 0 : _c.grade);
+        const originalGrade = this.gradeSystem.find((_b = data.originalDifficulty) === null || _b === void 0 ? void 0 : _b.grade);
         if (originalGrade)
             this.originalGrade = originalGrade;
         else
             this.originalGrade = this.grade;
         this.averageGradeData = data.averageGradeData;
-        this.tickCountFlash = data.tickCountFlash;
-        this.tickCountOnsight = data.tickCountOnsight;
-        this.tickCountRedpoint = data.tickCountRedpoint;
-        this.tickCountToprope = data.tickCountToprope;
+        this.tickCountFlash = data.tickCountFlash || 0;
+        this.tickCountOnsight = data.tickCountOnsight || 0;
+        this.tickCountRedpoint = data.tickCountRedpoint || 0;
+        this.tickCountToprope = data.tickCountToprope || 0;
     }
     setNewGrade(grade) {
         if (grade) {
@@ -71,9 +71,6 @@ class Route {
             }
             this.grade = grade;
         }
-    }
-    hello_delete() {
-        return "HELLO WORLD";
     }
     toFirestore() {
         return {

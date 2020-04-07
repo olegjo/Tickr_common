@@ -1,5 +1,5 @@
 import { DocumentData } from "../../firestore_types";
-import { BarChartData } from "../../BarChartData";
+import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
 interface ISector {
     id: string;
@@ -30,11 +30,26 @@ export interface IPostRouteData {
         name: string;
     };
 }
+export interface IRouteData {
+    name?: string;
+    type: RouteType;
+    sector: ISector;
+    routeSetter: IRouteSetter;
+    gym: IGym;
+    gradeOpinionBarChart: IBarChartDataItem[];
+    difficulty: ClimbingGrades.IFirestoreClimbingGrade;
+    originalDifficulty?: ClimbingGrades.IFirestoreClimbingGrade;
+    tickCountFlash?: number;
+    tickCountOnsight?: number;
+    tickCountRedpoint?: number;
+    tickCountToprope?: number;
+    averageGradeData?: IAverageData;
+}
 export declare function validatePostRouteData(data: IPostRouteData): boolean;
 export declare class Route {
     gradeOpinionChartData: BarChartData;
     averageGradeData?: IAverageData;
-    name: string;
+    name?: string;
     grade: ClimbingGrades.ClimbingGradeBase<any>;
     private _routeSetter;
     private _sector;
@@ -46,30 +61,9 @@ export declare class Route {
     readonly tickCountRedpoint: number;
     readonly tickCountToprope: number;
     readonly tickCountOnsight: number;
-    constructor(data: any);
+    constructor(data: IRouteData);
     setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>): void;
-    hello_delete(): string;
-    toFirestore(): {
-        name: string;
-        type: "route" | "boulder";
-        sector: ISector;
-        routeSetter: IRouteSetter;
-        gym: IGym;
-        difficulty: {
-            type: string;
-            grade: any;
-        };
-        originalDifficulty: {
-            type: string;
-            grade: any;
-        };
-        gradeOpinionBarChart: import("../../BarChartData").IBarChartDataItem[];
-        averageGradeData: IAverageData | undefined;
-        tickCountFlash: number;
-        tickCountOnsight: number;
-        tickCountRedpoint: number;
-        tickCountToprope: number;
-    };
+    toFirestore(): IRouteData;
     static toFirestore(data: Route): DocumentData;
     static fromFirestore(data: DocumentData): Route;
     get sector(): ISector;

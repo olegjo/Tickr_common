@@ -15,6 +15,8 @@ class ClimbingGradeSystem {
         return this.grades[index];
     }
     find(label) {
+        if (!label)
+            return undefined;
         return this.grades.find((grade) => grade.getLabel() === label);
     }
     findClosestByNumericValue(value) {

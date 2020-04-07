@@ -32,7 +32,7 @@ export abstract class ClimbingGradeBase<T extends string = string> {
 
     abstract get gradeSystemName(): string;
 
-    public toFirestore(): { type: string; grade: T; } {
+    public toFirestore(): IFirestoreClimbingGrade {
         return {
             type: this.gradeSystemName,
             grade: this.label

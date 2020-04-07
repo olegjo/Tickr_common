@@ -19,7 +19,8 @@ export abstract class ClimbingGradeSystem<U extends string = string, T extends C
         return this.grades[index];
     }
 
-    public find(label: U): T | undefined {
+    public find(label?: U): T | undefined {
+        if (!label) return undefined;
         return this.grades.find((grade) => grade.getLabel() === label);
     }
 

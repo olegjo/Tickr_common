@@ -1,5 +1,5 @@
 import { DocumentData } from "../../firestore_types";
-import { BarChartData } from "../../BarChartData";
+import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
 
 interface ISector {
@@ -37,6 +37,23 @@ export interface IPostRouteData {
     };
 }
 
+export interface IRouteData {
+    name?: string; // required if type === "route"
+    type: RouteType;
+    sector: ISector;
+    routeSetter: IRouteSetter;
+    gym: IGym;
+    gradeOpinionBarChart: IBarChartDataItem[];
+    difficulty: ClimbingGrades.IFirestoreClimbingGrade;
+
+    originalDifficulty?: ClimbingGrades.IFirestoreClimbingGrade;
+    tickCountFlash?: number;
+    tickCountOnsight?: number;
+    tickCountRedpoint?: number;
+    tickCountToprope?: number;
+    averageGradeData?: IAverageData;
+}
+
 export function validatePostRouteData(data: IPostRouteData): boolean {
     if (!data) return false;
 
@@ -59,7 +76,7 @@ export function validatePostRouteData(data: IPostRouteData): boolean {
 export class Route {
     public gradeOpinionChartData: BarChartData;
     public averageGradeData?: IAverageData;
-    public name: string;
+    public name?: string;
     public grade: ClimbingGrades.ClimbingGradeBase<any>;
     
     private _routeSetter: IRouteSetter;
@@ -74,7 +91,7 @@ export class Route {
     readonly tickCountToprope: number = 0;
     readonly tickCountOnsight: number = 0;
 
-    constructor(data: any) {
+    constructor(data: IRouteData) {
         this.name = data.name;
         this.type = data.type;
         if (this.type === "route" && !this.name) throw new Error("Invalid argument.");
@@ -87,7 +104,7 @@ export class Route {
         this.gradeOpinionChartData = new BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
 
-        this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty?.type);
+        this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty.type);
         
         const grade = this.gradeSystem.find(data.difficulty?.grade);
         if (!grade) throw new Error("Invalid argument");
@@ -99,10 +116,10 @@ export class Route {
 
         this.averageGradeData = data.averageGradeData;
 
-        this.tickCountFlash = data.tickCountFlash;
-        this.tickCountOnsight = data.tickCountOnsight;
-        this.tickCountRedpoint = data.tickCountRedpoint;
-        this.tickCountToprope = data.tickCountToprope;
+        this.tickCountFlash = data.tickCountFlash || 0;
+        this.tickCountOnsight = data.tickCountOnsight || 0;
+        this.tickCountRedpoint = data.tickCountRedpoint || 0;
+        this.tickCountToprope = data.tickCountToprope || 0;
     }
 
     public setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>) {
@@ -114,11 +131,7 @@ export class Route {
         }
     }
 
-    public hello_delete() {
-        return "HELLO WORLD";
-    }
-
-    public toFirestore() {
+    public toFirestore(): IRouteData {
         return {
             name: this.name,
             type: this.type,
@@ -141,7 +154,7 @@ export class Route {
     }
     
     static fromFirestore(data: DocumentData): Route {
-        return new Route(data);
+        return new Route(data as IRouteData);
     }
 
     get sector() {

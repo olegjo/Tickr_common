@@ -12,8 +12,5 @@ export declare abstract class ClimbingGradeBase<T extends string = string> {
     getLabel(): T;
     getColor(): string;
     abstract get gradeSystemName(): string;
-    toFirestore(): {
-        type: string;
-        grade: T;
-    };
+    toFirestore(): IFirestoreClimbingGrade;
 }
