@@ -1,6 +1,9 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gym = require("./gyms/gym");
-exports.route = require("./routes/route");
-exports.ticks = require("./TickData");
+__export(require("./gyms/gym"));
+__export(require("./routes/route"));
+__export(require("./TickData"));
 //# sourceMappingURL=index.js.map
