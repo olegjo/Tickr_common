@@ -7,8 +7,8 @@ export * from "./ClimbingGradeBase";
 export * from "./ClimbingGradeSystem";
 export * from "./ClimbingGradeList";
 
-export function getGradeSystem(type: string): ClimbingGradeSystem<any, any> {
-    const registeredGradeSystems: ClimbingGradeSystem<any, any>[] = [
+export function getGradeSystem(type: string): ClimbingGradeSystem {
+    const registeredGradeSystems: ClimbingGradeSystem[] = [
         new NorwegianClimbingGradeSystem(),
         new ColorBoulderingGradeSystem(),
     ];
