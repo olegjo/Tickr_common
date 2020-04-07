@@ -33,6 +33,9 @@ class BarChartData {
             }
         }
     }
+    sort(compareFn) {
+        return this.data.sort(compareFn);
+    }
 }
 exports.BarChartData = BarChartData;
 //# sourceMappingURL=BarChartData.js.map

@@ -8,4 +8,5 @@ export declare class BarChartData {
     getData(): IBarChartDataItem[];
     toFirestore(): IBarChartDataItem[];
     fromFirestore(data: any): void;
+    sort(compareFn: (a: IBarChartDataItem, b: IBarChartDataItem) => number): IBarChartDataItem[];
 }

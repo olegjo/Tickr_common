@@ -37,4 +37,8 @@ export class BarChartData {
             }
         }
     }
+
+    public sort(compareFn: (a: IBarChartDataItem, b: IBarChartDataItem) => number) {
+        return this.data.sort(compareFn);
+    }
 }
