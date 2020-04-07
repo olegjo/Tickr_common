@@ -48,6 +48,7 @@ export declare class Route {
     readonly tickCountOnsight: number;
     constructor(data: any);
     setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>): void;
+    hello_delete(): string;
     toFirestore(): {
         name: string;
         type: "route" | "boulder";

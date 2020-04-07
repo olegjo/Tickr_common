@@ -114,6 +114,10 @@ export class Route {
         }
     }
 
+    public hello_delete() {
+        return "HELLO WORLD";
+    }
+
     public toFirestore() {
         return {
             name: this.name,

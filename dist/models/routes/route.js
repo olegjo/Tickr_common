@@ -72,6 +72,9 @@ class Route {
             this.grade = grade;
         }
     }
+    hello_delete() {
+        return "HELLO WORLD";
+    }
     toFirestore() {
         return {
             name: this.name,
