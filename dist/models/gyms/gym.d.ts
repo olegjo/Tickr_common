@@ -7,7 +7,10 @@ export interface IOpeningHours {
 export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
-    gradeSystem: string;
+    gradeSystems: {
+        routes: string;
+        bouldering: string;
+    };
     gradeDistributionBarChartData?: {
         routes: IBarChartDataItem[];
         boulders: IBarChartDataItem[];
@@ -18,7 +21,10 @@ export declare class Gym {
     gradeBarChartDataBoulders: BarChartData;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
-    readonly gradeSystem: string;
+    readonly gradeSystems: {
+        routes: string;
+        bouldering: string;
+    };
     constructor(data: IGymData);
     toFirestore(): IGymData;
     static toFirestore(data: Gym): DocumentData;

@@ -4,7 +4,7 @@ const BarChartData_1 = require("../../BarChartData");
 class Gym {
     constructor(data) {
         var _a, _b;
-        if (!data.name || !data.openingHours || !data.gradeSystem) {
+        if (!data.name || !data.openingHours || !data.gradeSystems) {
             throw new Error("Invalid argument");
         }
         this.name = data.name;
@@ -13,13 +13,13 @@ class Gym {
         this.gradeBarChartDataBoulders = new BarChartData_1.BarChartData();
         this.gradeBarChartDataBoulders.fromFirestore((_b = data.gradeDistributionBarChartData) === null || _b === void 0 ? void 0 : _b.boulders);
         this.openingHours = data.openingHours;
-        this.gradeSystem = data.gradeSystem;
+        this.gradeSystems = data.gradeSystems;
     }
     toFirestore() {
         return {
             name: this.name,
             openingHours: this.openingHours,
-            gradeSystem: this.gradeSystem,
+            gradeSystems: this.gradeSystems,
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
                 routes: this.gradeBarChartDataRoutes.toFirestore(),
