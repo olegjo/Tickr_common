@@ -36,8 +36,8 @@ export interface IRouteData {
     sector: ISector;
     routeSetter: IRouteSetter;
     gym: IGym;
-    gradeOpinionBarChart: IBarChartDataItem[];
     difficulty: ClimbingGrades.IFirestoreClimbingGrade;
+    gradeOpinionBarChart?: IBarChartDataItem[];
     originalDifficulty?: ClimbingGrades.IFirestoreClimbingGrade;
     tickCountFlash?: number;
     tickCountOnsight?: number;
