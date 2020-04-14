@@ -10,11 +10,12 @@ export interface IWallData {
 }
 export declare class Wall {
     gradeBarChartData: BarChartData;
+    readonly id?: string;
     readonly type: WallType;
     readonly height: number;
     readonly name: string;
     readonly routeCount: number;
-    constructor(data: IWallData);
+    constructor(data: IWallData, id?: string);
     toFirestore(): IWallData;
     static toFirestore(data: Wall): DocumentData;
     static fromFirestore(data: DocumentData): Wall;

@@ -53,6 +53,7 @@ export declare class Route {
     grade: ClimbingGrades.ClimbingGradeBase<any>;
     private _routeSetter;
     private _sector;
+    readonly id?: string;
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
@@ -61,7 +62,7 @@ export declare class Route {
     readonly tickCountRedpoint: number;
     readonly tickCountToprope: number;
     readonly tickCountOnsight: number;
-    constructor(data: IRouteData);
+    constructor(data: IRouteData, id?: string);
     setNewGrade(grade: ClimbingGrades.ClimbingGradeBase<any>): void;
     toFirestore(): IRouteData;
     static toFirestore(data: Route): DocumentData;

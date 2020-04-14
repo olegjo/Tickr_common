@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
 class Gym {
-    constructor(data) {
+    constructor(data, id) {
         var _a, _b;
         if (!data.name || !data.openingHours || !data.gradeSystems) {
             throw new Error("Invalid argument");
         }
+        this.id = id;
         this.name = data.name;
         this.gradeBarChartDataRoutes = new BarChartData_1.BarChartData();
         this.gradeBarChartDataRoutes.fromFirestore((_a = data.gradeDistributionBarChartData) === null || _a === void 0 ? void 0 : _a.routes);

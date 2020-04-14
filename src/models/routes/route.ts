@@ -82,6 +82,8 @@ export class Route {
     private _routeSetter: IRouteSetter;
     private _sector: ISector;
     
+    readonly id?: string;
+
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
@@ -91,7 +93,9 @@ export class Route {
     readonly tickCountToprope: number = 0;
     readonly tickCountOnsight: number = 0;
 
-    constructor(data: IRouteData) {
+    constructor(data: IRouteData, id?: string) {
+        this.id = id;
+        
         this.name = data.name;
         this.type = data.type;
         if (this.type === "route" && !this.name) throw new Error("Invalid argument.");

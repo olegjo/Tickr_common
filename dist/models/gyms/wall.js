@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
 class Wall {
-    constructor(data) {
+    constructor(data, id) {
         if (!data.height_meters || !data.name || !data.type || !data.routeCount) {
             throw new Error("Invalid argument");
         }
+        this.id = id;
         this.type = data.type;
         this.height = data.height_meters;
         this.name = data.name;

@@ -15,15 +15,18 @@ export interface IWallData {
 export class Wall {
     public gradeBarChartData: BarChartData;
 
+    readonly id?: string;
     readonly type: WallType;
     readonly height: number;
     readonly name: string;
     readonly routeCount: number;
 
-    constructor(data: IWallData) {
+    constructor(data: IWallData, id?: string) {
         if (!data.height_meters || !data.name || !data.type || !data.routeCount) {
             throw new Error("Invalid argument");
         }
+
+        this.id = id;
 
         this.type = data.type;
         this.height = data.height_meters;

@@ -20,14 +20,17 @@ export interface IGymData {
 export class Gym {
     public gradeBarChartDataRoutes: BarChartData;
     public gradeBarChartDataBoulders: BarChartData;
+    readonly id?: string;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
     readonly gradeSystems: { routes: string; bouldering: string; };
 
-    constructor(data: IGymData) {
+    constructor(data: IGymData, id?: string) {
         if (!data.name || !data.openingHours || !data.gradeSystems) {
             throw new Error("Invalid argument");
         }
+
+        this.id = id;
 
         this.name = data.name;
 

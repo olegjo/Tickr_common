@@ -19,13 +19,14 @@ export interface IGymData {
 export declare class Gym {
     gradeBarChartDataRoutes: BarChartData;
     gradeBarChartDataBoulders: BarChartData;
+    readonly id?: string;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
     readonly gradeSystems: {
         routes: string;
         bouldering: string;
     };
-    constructor(data: IGymData);
+    constructor(data: IGymData, id?: string);
     toFirestore(): IGymData;
     static toFirestore(data: Gym): DocumentData;
     static fromFirestore(data: DocumentData): Gym;

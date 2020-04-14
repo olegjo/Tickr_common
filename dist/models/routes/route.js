@@ -31,12 +31,13 @@ function validatePostRouteData(data) {
 }
 exports.validatePostRouteData = validatePostRouteData;
 class Route {
-    constructor(data) {
+    constructor(data, id) {
         var _a, _b;
         this.tickCountFlash = 0;
         this.tickCountRedpoint = 0;
         this.tickCountToprope = 0;
         this.tickCountOnsight = 0;
+        this.id = id;
         this.name = data.name;
         this.type = data.type;
         if (this.type === "route" && !this.name)
