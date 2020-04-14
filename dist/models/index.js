@@ -4,6 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./gyms/gym"));
+__export(require("./gyms/wall"));
 __export(require("./routes/route"));
 __export(require("./TickData"));
 //# sourceMappingURL=index.js.map
