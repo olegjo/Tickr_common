@@ -13,6 +13,21 @@ class Wall {
         this.gradeBarChartData = new BarChartData_1.BarChartData();
         this.gradeBarChartData.fromFirestore(data.gradeDistributionBarChartData);
     }
+    toFirestore() {
+        return {
+            name: this.name,
+            height_meters: this.height,
+            routeCount: this.routeCount,
+            type: this.type,
+            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore()
+        };
+    }
+    static toFirestore(data) {
+        return data.toFirestore();
+    }
+    static fromFirestore(data) {
+        return new Wall(data);
+    }
 }
 exports.Wall = Wall;
 //# sourceMappingURL=wall.js.map

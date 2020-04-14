@@ -1,3 +1,4 @@
+import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 
 export type WallType = "sportclimbing" | "bouldering";
@@ -31,5 +32,23 @@ export class Wall {
 
         this.gradeBarChartData = new BarChartData();
         this.gradeBarChartData.fromFirestore(data.gradeDistributionBarChartData);
+    }
+
+    public toFirestore(): IWallData {
+        return {
+            name: this.name,
+            height_meters: this.height,
+            routeCount: this.routeCount,
+            type: this.type,
+            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore()
+        };
+    }
+
+    static toFirestore(data: Wall): DocumentData {
+        return data.toFirestore();
+    }
+    
+    static fromFirestore(data: DocumentData): Wall {
+        return new Wall(data as IWallData);
     }
 }
