@@ -9,7 +9,10 @@
     "node": "8"
   },
   "main": "dist/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/node": "^13.11.1",
+    "util": "^0.12.2"
+  },
   "devDependencies": {
     "tslint": "^5.20.1",
     "typescript": "^3.7.4"

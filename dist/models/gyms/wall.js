@@ -1,9 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
+const util_1 = require("util");
+const WALL_TYPES = ["sportclimbing", "bouldering"];
 class Wall {
     constructor(data, id) {
-        if (!data.height_meters || !data.name || !data.type || !data.routeCount) {
+        if (util_1.isNullOrUndefined(data.height_meters) ||
+            util_1.isNullOrUndefined(data.name) ||
+            util_1.isNullOrUndefined(data.type) ||
+            util_1.isNullOrUndefined(data.routeCount)) {
             throw new Error("Invalid argument");
         }
         this.id = id;

@@ -1,5 +1,6 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
+import { isNullOrUndefined } from "util";
 
 export interface IOpeningHours {
     days: string;
@@ -26,7 +27,11 @@ export class Gym {
     readonly gradeSystems: { routes: string; bouldering: string; };
 
     constructor(data: IGymData, id?: string) {
-        if (!data.name || !data.openingHours || !data.gradeSystems) {
+        if (
+            isNullOrUndefined(data.name) ||
+            isNullOrUndefined(data.openingHours) ||
+            isNullOrUndefined(data.gradeSystems)
+        ) {
             throw new Error("Invalid argument");
         }
 

@@ -1,10 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
+const util_1 = require("util");
 class Gym {
     constructor(data, id) {
         var _a, _b;
-        if (!data.name || !data.openingHours || !data.gradeSystems) {
+        if (util_1.isNullOrUndefined(data.name) ||
+            util_1.isNullOrUndefined(data.openingHours) ||
+            util_1.isNullOrUndefined(data.gradeSystems)) {
             throw new Error("Invalid argument");
         }
         this.id = id;

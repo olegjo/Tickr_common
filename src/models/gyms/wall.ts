@@ -1,7 +1,9 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
+import { isNullOrUndefined } from "util";
 
-export type WallType = "sportclimbing" | "bouldering";
+const WALL_TYPES = ["sportclimbing", "bouldering"] as const;
+export type WallType = typeof WALL_TYPES[number];
 
 export interface IWallData {
     name: string;
@@ -22,7 +24,12 @@ export class Wall {
     readonly routeCount: number;
 
     constructor(data: IWallData, id?: string) {
-        if (!data.height_meters || !data.name || !data.type || !data.routeCount) {
+        if (
+            isNullOrUndefined(data.height_meters) || 
+            isNullOrUndefined(data.name) ||
+            isNullOrUndefined(data.type) ||
+            isNullOrUndefined(data.routeCount)
+        ) {
             throw new Error("Invalid argument");
         }
 
