@@ -8,10 +8,11 @@ class ColorBoulderingClimbingGrade extends ClimbingGradeBase_1.ClimbingGradeBase
         super(label, value, numericValueRange, color);
     }
     get gradeSystemName() {
-        return "ColorBoulderingClimbingGrade";
+        return ColorBoulderingClimbingGrade.GRADE_SYSTEM_NAME;
     }
 }
 exports.ColorBoulderingClimbingGrade = ColorBoulderingClimbingGrade;
+ColorBoulderingClimbingGrade.GRADE_SYSTEM_NAME = "ColorBoulderingClimbingGrade";
 class ColorBoulderingGradeSystem extends ClimbingGradeSystem_1.ClimbingGradeSystem {
     constructor() {
         super([

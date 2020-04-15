@@ -5,12 +5,13 @@ const grades = [ "< 3-", "3-", "3", "3+", "4-", "4", "4+", "5-", "5", "5+", "6-"
 export type NorwegianGradeValue = typeof grades[number];
 
 export class NorwegianClimbingGrade extends ClimbingGradeBase<NorwegianGradeValue> {
+    static GRADE_SYSTEM_NAME = "NorwegianClimbingGrade";
     constructor(label: string, value: NorwegianGradeValue, numericValueRange: [number, number], color: string) {
         super(label, value, numericValueRange, color);
     }
 
     get gradeSystemName() {
-        return "NorwegianClimbingGrade";
+        return NorwegianClimbingGrade.GRADE_SYSTEM_NAME;
     }
 }
 

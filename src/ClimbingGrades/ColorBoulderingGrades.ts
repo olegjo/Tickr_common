@@ -5,12 +5,13 @@ const grades = [ "white", "green", "blue", "yellow", "red", "black", "silver" ] 
 export type ColorGradeValue = typeof grades[number];
 
 export class ColorBoulderingClimbingGrade extends ClimbingGradeBase<ColorGradeValue> {
+    static GRADE_SYSTEM_NAME = "ColorBoulderingClimbingGrade";
     constructor(label: string, value: ColorGradeValue, numericValueRange: [number, number], color: string) {
         super(label, value, numericValueRange, color);
     }
 
     get gradeSystemName() {
-        return "ColorBoulderingClimbingGrade";
+        return ColorBoulderingClimbingGrade.GRADE_SYSTEM_NAME;
     }
 }
 

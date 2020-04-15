@@ -8,10 +8,11 @@ class NorwegianClimbingGrade extends ClimbingGradeBase_1.ClimbingGradeBase {
         super(label, value, numericValueRange, color);
     }
     get gradeSystemName() {
-        return "NorwegianClimbingGrade";
+        return NorwegianClimbingGrade.GRADE_SYSTEM_NAME;
     }
 }
 exports.NorwegianClimbingGrade = NorwegianClimbingGrade;
+NorwegianClimbingGrade.GRADE_SYSTEM_NAME = "NorwegianClimbingGrade";
 class NorwegianClimbingGradeSystem extends ClimbingGradeSystem_1.ClimbingGradeSystem {
     constructor() {
         super([
