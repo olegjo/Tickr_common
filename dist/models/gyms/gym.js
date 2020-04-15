@@ -20,7 +20,7 @@ class Gym {
         this.openingHours = data.openingHours;
         this.gradeSystems = {
             routes: ClimbingGrades_1.getGradeSystem(data.gradeSystems.routes),
-            bouldering: ClimbingGrades_1.getGradeSystem(data.gradeSystems.routes)
+            bouldering: ClimbingGrades_1.getGradeSystem(data.gradeSystems.bouldering)
         };
     }
     toFirestore() {

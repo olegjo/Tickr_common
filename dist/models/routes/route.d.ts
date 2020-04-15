@@ -1,6 +1,7 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
+import * as ClimbingHolds from "../../ClimbingHolds";
 interface ISector {
     id: string;
     name: string;
@@ -18,7 +19,7 @@ interface IAverageData {
     total: number;
 }
 declare const routeTypes: readonly ["route", "boulder"];
-declare type RouteType = typeof routeTypes[number];
+export declare type RouteType = typeof routeTypes[number];
 export interface IPostRouteData {
     type: RouteType;
     name?: string;
@@ -29,6 +30,7 @@ export interface IPostRouteData {
         userId: string;
         name: string;
     };
+    holds: ClimbingHolds.IFirestoreHoldsCollection;
 }
 export interface IRouteData {
     name?: string;
@@ -37,6 +39,7 @@ export interface IRouteData {
     routeSetter: IRouteSetter;
     gym: IGym;
     difficulty: ClimbingGrades.IFirestoreClimbingGrade;
+    holds: ClimbingHolds.IFirestoreHoldsCollection;
     gradeOpinionBarChart?: IBarChartDataItem[];
     originalDifficulty?: ClimbingGrades.IFirestoreClimbingGrade;
     tickCountFlash?: number;
@@ -59,6 +62,7 @@ export declare class Route {
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
+    readonly holds: ClimbingHolds.HoldsCollection;
     readonly tickCountFlash: number;
     readonly tickCountRedpoint: number;
     readonly tickCountToprope: number;

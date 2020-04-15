@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
 const ClimbingGrades = require("../../ClimbingGrades");
+const util_1 = require("util");
+const ClimbingHolds = require("../../ClimbingHolds");
 ;
 ;
 ;
@@ -27,6 +29,8 @@ function validatePostRouteData(data) {
         return false;
     if (((_c = data.sectorId) === null || _c === void 0 ? void 0 : _c.length) <= 0)
         return false;
+    if (!data.holds)
+        return false;
     return true;
 }
 exports.validatePostRouteData = validatePostRouteData;
@@ -47,6 +51,10 @@ class Route {
         this.gym = data.gym;
         if (!this.sector || !this._routeSetter || !this.gym)
             throw new Error("Invalid argument.");
+        if (util_1.isNullOrUndefined(data.holds)) {
+            throw new Error("Invalid argument");
+        }
+        this.holds = ClimbingHolds.getClimbingHoldsCollection(data.holds);
         this.gradeOpinionChartData = new BarChartData_1.BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
         this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty.type);
@@ -84,6 +92,7 @@ class Route {
             originalDifficulty: this.originalGrade.toFirestore(),
             gradeOpinionBarChart: this.gradeOpinionChartData.toFirestore(),
             averageGradeData: this.averageGradeData,
+            holds: this.holds.toFirestore(),
             tickCountFlash: this.tickCountFlash,
             tickCountOnsight: this.tickCountOnsight,
             tickCountRedpoint: this.tickCountRedpoint,

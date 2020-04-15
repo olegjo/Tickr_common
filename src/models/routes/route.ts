@@ -1,6 +1,8 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
+import { isNullOrUndefined } from "util";
+import * as ClimbingHolds from "../../ClimbingHolds";
 
 interface ISector {
     id: string;
@@ -23,7 +25,7 @@ interface IAverageData {
 }
 
 const routeTypes = [ "route", "boulder" ] as const;
-type RouteType = typeof routeTypes[number];
+export type RouteType = typeof routeTypes[number];
 
 export interface IPostRouteData {
     type: RouteType;
@@ -35,6 +37,7 @@ export interface IPostRouteData {
         userId: string;
         name: string;
     };
+    holds: ClimbingHolds.IFirestoreHoldsCollection;
 }
 
 export interface IRouteData {
@@ -44,7 +47,8 @@ export interface IRouteData {
     routeSetter: IRouteSetter;
     gym: IGym;
     difficulty: ClimbingGrades.IFirestoreClimbingGrade;
-    
+
+    holds: ClimbingHolds.IFirestoreHoldsCollection;
     gradeOpinionBarChart?: IBarChartDataItem[];
     originalDifficulty?: ClimbingGrades.IFirestoreClimbingGrade;
     tickCountFlash?: number;
@@ -70,6 +74,8 @@ export function validatePostRouteData(data: IPostRouteData): boolean {
     if (typeof(data.sectorId) !== "string") return false;
     if (data.sectorId?.length <= 0) return false;
 
+    if (!data.holds) return false;
+
     return true;
 }
 
@@ -90,6 +96,7 @@ export class Route {
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
     readonly gradeSystem: ClimbingGrades.ClimbingGradeSystem;
+    readonly holds: ClimbingHolds.HoldsCollection;
     readonly tickCountFlash: number = 0;
     readonly tickCountRedpoint: number = 0;
     readonly tickCountToprope: number = 0;
@@ -106,6 +113,12 @@ export class Route {
         this._routeSetter = data.routeSetter;
         this.gym = data.gym;
         if (!this.sector || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
+
+        if (isNullOrUndefined(data.holds)) {
+            throw new Error("Invalid argument");
+        }
+
+        this.holds = ClimbingHolds.getClimbingHoldsCollection(data.holds);
 
         this.gradeOpinionChartData = new BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
@@ -148,6 +161,7 @@ export class Route {
             originalDifficulty: this.originalGrade.toFirestore(),
             gradeOpinionBarChart: this.gradeOpinionChartData.toFirestore(),
             averageGradeData: this.averageGradeData,
+            holds: this.holds.toFirestore(),
             tickCountFlash: this.tickCountFlash,
             tickCountOnsight: this.tickCountOnsight,
             tickCountRedpoint: this.tickCountRedpoint,

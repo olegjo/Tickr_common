@@ -1,0 +1,1 @@
+{"version":3,"file":"HoldsCollection.js","sourceRoot":"","sources":["../../src/ClimbingHolds/HoldsCollection.ts"],"names":[],"mappings":";;AAIA,MAAa,eAAe;IAGxB,YAAY,KAAa;QACrB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACvB,CAAC;IAEM,WAAW;QACd,OAAO;YACH,KAAK,EAAE,IAAI,CAAC,KAAK;SACpB,CAAC;IACN,CAAC;CACJ;AAZD,0CAYC"}

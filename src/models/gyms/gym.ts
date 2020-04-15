@@ -54,7 +54,7 @@ export class Gym {
         this.openingHours = data.openingHours;
         this.gradeSystems = {
             routes: getGradeSystem(data.gradeSystems.routes),
-            bouldering: getGradeSystem(data.gradeSystems.routes)
+            bouldering: getGradeSystem(data.gradeSystems.bouldering)
         }
     }
 
