@@ -47,13 +47,14 @@ export interface IRouteData {
 }
 export declare function validatePostRouteData(data: IPostRouteData): boolean;
 export declare class Route {
+    static COLLECTION_NAME: string;
     gradeOpinionChartData: BarChartData;
     averageGradeData?: IAverageData;
     name?: string;
     grade: ClimbingGrades.ClimbingGradeBase<any>;
     private _routeSetter;
-    private _sector;
     readonly id?: string;
+    readonly sector: ISector;
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
@@ -67,7 +68,6 @@ export declare class Route {
     toFirestore(): IRouteData;
     static toFirestore(data: Route): DocumentData;
     static fromFirestore(data: DocumentData): Route;
-    get sector(): ISector;
     get routeSetter(): IRouteSetter;
 }
 export {};

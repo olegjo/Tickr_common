@@ -74,16 +74,18 @@ export function validatePostRouteData(data: IPostRouteData): boolean {
 }
 
 export class Route {
+    static COLLECTION_NAME = "routes";
+
     public gradeOpinionChartData: BarChartData;
     public averageGradeData?: IAverageData;
     public name?: string;
     public grade: ClimbingGrades.ClimbingGradeBase<any>;
     
     private _routeSetter: IRouteSetter;
-    private _sector: ISector;
     
     readonly id?: string;
-
+    
+    readonly sector: ISector;
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
@@ -100,21 +102,21 @@ export class Route {
         this.type = data.type;
         if (this.type === "route" && !this.name) throw new Error("Invalid argument.");
 
-        this._sector = data.sector;
+        this.sector = data.sector;
         this._routeSetter = data.routeSetter;
         this.gym = data.gym;
-        if (!this._sector || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
+        if (!this.sector || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
 
         this.gradeOpinionChartData = new BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
 
         this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty.type);
         
-        const grade = this.gradeSystem.find(data.difficulty?.grade);
+        const grade = this.gradeSystem.findByValue(data.difficulty?.value);
         if (!grade) throw new Error("Invalid argument");
         this.grade = grade;
 
-        const originalGrade = this.gradeSystem.find(data.originalDifficulty?.grade);
+        const originalGrade = this.gradeSystem.findByValue(data.originalDifficulty?.value);
         if (originalGrade) this.originalGrade = originalGrade;
         else this.originalGrade = this.grade;
 
@@ -139,7 +141,7 @@ export class Route {
         let ret = {
             name: this.name,
             type: this.type,
-            sector: this._sector,
+            sector: this.sector,
             routeSetter: this._routeSetter,
             gym: this.gym,
             difficulty: this.grade.toFirestore(),
@@ -161,10 +163,6 @@ export class Route {
     
     static fromFirestore(data: DocumentData): Route {
         return new Route(data as IRouteData);
-    }
-
-    get sector() {
-        return this._sector;
     }
 
     get routeSetter() {

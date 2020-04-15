@@ -15,6 +15,8 @@ export interface IWallData {
 }
 
 export class Wall {
+    static COLLECTION_NAME = "walls";
+
     public gradeBarChartData: BarChartData;
 
     readonly id?: string;

@@ -1,6 +1,7 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import { isNullOrUndefined } from "util";
+import { getGradeSystem, ClimbingGradeSystem } from "../../ClimbingGrades";
 
 export interface IOpeningHours {
     days: string;
@@ -19,12 +20,17 @@ export interface IGymData {
 }
 
 export class Gym {
+    static COLLECTION_NAME = "gyms";
+
     public gradeBarChartDataRoutes: BarChartData;
     public gradeBarChartDataBoulders: BarChartData;
     readonly id?: string;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
-    readonly gradeSystems: { routes: string; bouldering: string; };
+    readonly gradeSystems: {
+        routes: ClimbingGradeSystem;
+        bouldering: ClimbingGradeSystem;
+    };
 
     constructor(data: IGymData, id?: string) {
         if (
@@ -46,14 +52,20 @@ export class Gym {
         this.gradeBarChartDataBoulders.fromFirestore(data.gradeDistributionBarChartData?.boulders);
 
         this.openingHours = data.openingHours;
-        this.gradeSystems = data.gradeSystems;
+        this.gradeSystems = {
+            routes: getGradeSystem(data.gradeSystems.routes),
+            bouldering: getGradeSystem(data.gradeSystems.routes)
+        }
     }
 
     public toFirestore(): IGymData {
         return {
             name: this.name,
             openingHours: this.openingHours,
-            gradeSystems: this.gradeSystems,
+            gradeSystems: {
+                routes: this.gradeSystems.routes.gradeSystemName,
+                bouldering: this.gradeSystems.bouldering.gradeSystemName
+            },
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
                 routes: this.gradeBarChartDataRoutes.toFirestore(),

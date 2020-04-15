@@ -10,6 +10,7 @@ export interface IWallData {
     gradeDistributionBarChartData?: IBarChartDataItem[];
 }
 export declare class Wall {
+    static COLLECTION_NAME: string;
     gradeBarChartData: BarChartData;
     readonly id?: string;
     readonly type: WallType;

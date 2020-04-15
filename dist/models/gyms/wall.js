@@ -36,4 +36,5 @@ class Wall {
     }
 }
 exports.Wall = Wall;
+Wall.COLLECTION_NAME = "walls";
 //# sourceMappingURL=wall.js.map

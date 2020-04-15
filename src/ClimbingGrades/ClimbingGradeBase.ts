@@ -1,15 +1,18 @@
 
 export interface IFirestoreClimbingGrade {
     type: string;
-    grade: string;
+    label: string;
+    value: string;
 }
 
 export abstract class ClimbingGradeBase<T extends string = string> {
-    protected label: T;
+    protected label: string;
+    protected value: T;
     protected numericValueRange: [number, number];
     protected color: string;
-    constructor(label: T, numericValueRange: [number, number], color: string) {
+    constructor(label: string, value: T, numericValueRange: [number, number], color: string) {
         this.label = label;
+        this.value = value;
         this.numericValueRange = numericValueRange;
         this.color = color;
     }
@@ -22,8 +25,12 @@ export abstract class ClimbingGradeBase<T extends string = string> {
         return this.numericValueRange;
     }
 
-    public getLabel(): T {
+    public getLabel(): string {
         return this.label;
+    }
+
+    public getValue(): T {
+        return this.value;
     }
 
     public getColor() {
@@ -35,7 +42,8 @@ export abstract class ClimbingGradeBase<T extends string = string> {
     public toFirestore(): IFirestoreClimbingGrade {
         return {
             type: this.gradeSystemName,
-            grade: this.label
+            label: this.label,
+            value: this.value,
         };
     }
 }

@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class ClimbingGradeBase {
-    constructor(label, numericValueRange, color) {
+    constructor(label, value, numericValueRange, color) {
         this.label = label;
+        this.value = value;
         this.numericValueRange = numericValueRange;
         this.color = color;
     }
@@ -15,13 +16,17 @@ class ClimbingGradeBase {
     getLabel() {
         return this.label;
     }
+    getValue() {
+        return this.value;
+    }
     getColor() {
         return this.color;
     }
     toFirestore() {
         return {
             type: this.gradeSystemName,
-            grade: this.label
+            label: this.label,
+            value: this.value,
         };
     }
 }

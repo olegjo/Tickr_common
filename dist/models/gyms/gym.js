@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
 const util_1 = require("util");
+const ClimbingGrades_1 = require("../../ClimbingGrades");
 class Gym {
     constructor(data, id) {
         var _a, _b;
@@ -17,13 +18,19 @@ class Gym {
         this.gradeBarChartDataBoulders = new BarChartData_1.BarChartData();
         this.gradeBarChartDataBoulders.fromFirestore((_b = data.gradeDistributionBarChartData) === null || _b === void 0 ? void 0 : _b.boulders);
         this.openingHours = data.openingHours;
-        this.gradeSystems = data.gradeSystems;
+        this.gradeSystems = {
+            routes: ClimbingGrades_1.getGradeSystem(data.gradeSystems.routes),
+            bouldering: ClimbingGrades_1.getGradeSystem(data.gradeSystems.routes)
+        };
     }
     toFirestore() {
         return {
             name: this.name,
             openingHours: this.openingHours,
-            gradeSystems: this.gradeSystems,
+            gradeSystems: {
+                routes: this.gradeSystems.routes.gradeSystemName,
+                bouldering: this.gradeSystems.bouldering.gradeSystemName
+            },
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
                 routes: this.gradeBarChartDataRoutes.toFirestore(),
@@ -38,4 +45,5 @@ class Gym {
     }
 }
 exports.Gym = Gym;
+Gym.COLLECTION_NAME = "gyms";
 //# sourceMappingURL=gym.js.map

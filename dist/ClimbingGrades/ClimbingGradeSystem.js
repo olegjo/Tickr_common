@@ -14,10 +14,10 @@ class ClimbingGradeSystem {
     at(index) {
         return this.grades[index];
     }
-    find(label) {
-        if (!label)
+    findByValue(value) {
+        if (!value)
             return undefined;
-        return this.grades.find((grade) => grade.getLabel() === label);
+        return this.grades.find((grade) => grade.getValue() === value);
     }
     findClosestByNumericValue(value) {
         let closest = this.grades[0];

@@ -42,19 +42,19 @@ class Route {
         this.type = data.type;
         if (this.type === "route" && !this.name)
             throw new Error("Invalid argument.");
-        this._sector = data.sector;
+        this.sector = data.sector;
         this._routeSetter = data.routeSetter;
         this.gym = data.gym;
-        if (!this._sector || !this._routeSetter || !this.gym)
+        if (!this.sector || !this._routeSetter || !this.gym)
             throw new Error("Invalid argument.");
         this.gradeOpinionChartData = new BarChartData_1.BarChartData();
         this.gradeOpinionChartData.fromFirestore(data.gradeOpinionBarChart);
         this.gradeSystem = ClimbingGrades.getGradeSystem(data.difficulty.type);
-        const grade = this.gradeSystem.find((_a = data.difficulty) === null || _a === void 0 ? void 0 : _a.grade);
+        const grade = this.gradeSystem.findByValue((_a = data.difficulty) === null || _a === void 0 ? void 0 : _a.value);
         if (!grade)
             throw new Error("Invalid argument");
         this.grade = grade;
-        const originalGrade = this.gradeSystem.find((_b = data.originalDifficulty) === null || _b === void 0 ? void 0 : _b.grade);
+        const originalGrade = this.gradeSystem.findByValue((_b = data.originalDifficulty) === null || _b === void 0 ? void 0 : _b.value);
         if (originalGrade)
             this.originalGrade = originalGrade;
         else
@@ -77,7 +77,7 @@ class Route {
         let ret = {
             name: this.name,
             type: this.type,
-            sector: this._sector,
+            sector: this.sector,
             routeSetter: this._routeSetter,
             gym: this.gym,
             difficulty: this.grade.toFirestore(),
@@ -97,12 +97,10 @@ class Route {
     static fromFirestore(data) {
         return new Route(data);
     }
-    get sector() {
-        return this._sector;
-    }
     get routeSetter() {
         return this._routeSetter;
     }
 }
 exports.Route = Route;
+Route.COLLECTION_NAME = "routes";
 //# sourceMappingURL=route.js.map
