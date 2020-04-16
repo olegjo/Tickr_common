@@ -9,23 +9,23 @@ export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
     gradeSystems: {
-        routes: string;
+        sportclimbing: string;
         bouldering: string;
     };
     gradeDistributionBarChartData?: {
-        routes: IBarChartDataItem[];
+        sportclimbing: IBarChartDataItem[];
         boulders: IBarChartDataItem[];
     };
 }
 export declare class Gym {
     static COLLECTION_NAME: string;
-    gradeBarChartDataRoutes: BarChartData;
+    gradeBarChartDataSportclimbing: BarChartData;
     gradeBarChartDataBoulders: BarChartData;
     readonly id?: string;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
     readonly gradeSystems: {
-        routes: ClimbingGradeSystem;
+        sportclimbing: ClimbingGradeSystem;
         bouldering: ClimbingGradeSystem;
     };
     constructor(data: IGymData, id?: string);

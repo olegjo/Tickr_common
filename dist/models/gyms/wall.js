@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BarChartData_1 = require("../../BarChartData");
 const util_1 = require("util");
-const WALL_TYPES = ["sportclimbing", "bouldering"];
 class Wall {
     constructor(data, id) {
         if (util_1.isNullOrUndefined(data.height_meters) ||

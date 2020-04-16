@@ -13,13 +13,13 @@ class Gym {
         }
         this.id = id;
         this.name = data.name;
-        this.gradeBarChartDataRoutes = new BarChartData_1.BarChartData();
-        this.gradeBarChartDataRoutes.fromFirestore((_a = data.gradeDistributionBarChartData) === null || _a === void 0 ? void 0 : _a.routes);
+        this.gradeBarChartDataSportclimbing = new BarChartData_1.BarChartData();
+        this.gradeBarChartDataSportclimbing.fromFirestore((_a = data.gradeDistributionBarChartData) === null || _a === void 0 ? void 0 : _a.sportclimbing);
         this.gradeBarChartDataBoulders = new BarChartData_1.BarChartData();
         this.gradeBarChartDataBoulders.fromFirestore((_b = data.gradeDistributionBarChartData) === null || _b === void 0 ? void 0 : _b.boulders);
         this.openingHours = data.openingHours;
         this.gradeSystems = {
-            routes: ClimbingGrades_1.getGradeSystem(data.gradeSystems.routes),
+            sportclimbing: ClimbingGrades_1.getGradeSystem(data.gradeSystems.sportclimbing),
             bouldering: ClimbingGrades_1.getGradeSystem(data.gradeSystems.bouldering)
         };
     }
@@ -28,12 +28,12 @@ class Gym {
             name: this.name,
             openingHours: this.openingHours,
             gradeSystems: {
-                routes: this.gradeSystems.routes.gradeSystemName,
+                sportclimbing: this.gradeSystems.sportclimbing.gradeSystemName,
                 bouldering: this.gradeSystems.bouldering.gradeSystemName
             },
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
-                routes: this.gradeBarChartDataRoutes.toFirestore(),
+                sportclimbing: this.gradeBarChartDataSportclimbing.toFirestore(),
             },
         };
     }

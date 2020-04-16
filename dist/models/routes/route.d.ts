@@ -18,7 +18,7 @@ interface IAverageData {
     n: number;
     total: number;
 }
-declare const routeTypes: readonly ["route", "boulder"];
+declare const routeTypes: readonly ["sportclimbing", "bouldering"];
 export declare type RouteType = typeof routeTypes[number];
 export interface IPostRouteData {
     type: RouteType;

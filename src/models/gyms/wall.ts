@@ -1,9 +1,9 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import { isNullOrUndefined } from "util";
+import { RouteType } from "../routes/route";
 
-const WALL_TYPES = ["sportclimbing", "bouldering"] as const;
-export type WallType = typeof WALL_TYPES[number];
+export type WallType = RouteType;
 
 export interface IWallData {
     name: string;

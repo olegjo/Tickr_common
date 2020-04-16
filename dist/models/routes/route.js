@@ -7,7 +7,7 @@ const ClimbingHolds = require("../../ClimbingHolds");
 ;
 ;
 ;
-const routeTypes = ["route", "boulder"];
+const routeTypes = ["sportclimbing", "bouldering"];
 function validatePostRouteData(data) {
     var _a, _b, _c;
     if (!data)
@@ -15,7 +15,7 @@ function validatePostRouteData(data) {
     if (!routeTypes.includes(data.type))
         return false;
     ;
-    if (data.type === "route") {
+    if (data.type === "sportclimbing") {
         if (typeof (data.name) !== "string")
             return false;
         if (((_a = data.name) === null || _a === void 0 ? void 0 : _a.length) <= 0)
@@ -44,7 +44,7 @@ class Route {
         this.id = id;
         this.name = data.name;
         this.type = data.type;
-        if (this.type === "route" && !this.name)
+        if (this.type === "sportclimbing" && !this.name)
             throw new Error("Invalid argument.");
         this.sector = data.sector;
         this._routeSetter = data.routeSetter;

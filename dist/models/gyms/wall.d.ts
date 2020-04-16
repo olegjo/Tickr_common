@@ -1,7 +1,7 @@
 import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
-declare const WALL_TYPES: readonly ["sportclimbing", "bouldering"];
-export declare type WallType = typeof WALL_TYPES[number];
+import { RouteType } from "../routes/route";
+export declare type WallType = RouteType;
 export interface IWallData {
     name: string;
     type: WallType;
@@ -22,4 +22,3 @@ export declare class Wall {
     static toFirestore(data: Wall): DocumentData;
     static fromFirestore(data: DocumentData): Wall;
 }
-export {};

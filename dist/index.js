@@ -5,5 +5,6 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./BarChartData"));
 __export(require("./ClimbingGrades"));
+__export(require("./ClimbingHolds"));
 __export(require("./models"));
 //# sourceMappingURL=index.js.map

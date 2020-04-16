@@ -11,10 +11,10 @@ export interface IOpeningHours {
 export interface IGymData {
     name: string;
     openingHours: IOpeningHours[];
-    gradeSystems: { routes: string; bouldering: string; };
+    gradeSystems: { sportclimbing: string; bouldering: string; };
 
     gradeDistributionBarChartData?: {
-        routes: IBarChartDataItem[],
+        sportclimbing: IBarChartDataItem[],
         boulders: IBarChartDataItem[],
     };
 }
@@ -22,13 +22,13 @@ export interface IGymData {
 export class Gym {
     static COLLECTION_NAME = "gyms";
 
-    public gradeBarChartDataRoutes: BarChartData;
+    public gradeBarChartDataSportclimbing: BarChartData;
     public gradeBarChartDataBoulders: BarChartData;
     readonly id?: string;
     readonly name: string;
     readonly openingHours: IOpeningHours[];
     readonly gradeSystems: {
-        routes: ClimbingGradeSystem;
+        sportclimbing: ClimbingGradeSystem;
         bouldering: ClimbingGradeSystem;
     };
 
@@ -45,15 +45,15 @@ export class Gym {
 
         this.name = data.name;
 
-        this.gradeBarChartDataRoutes = new BarChartData();
-        this.gradeBarChartDataRoutes.fromFirestore(data.gradeDistributionBarChartData?.routes);
+        this.gradeBarChartDataSportclimbing = new BarChartData();
+        this.gradeBarChartDataSportclimbing.fromFirestore(data.gradeDistributionBarChartData?.sportclimbing);
 
         this.gradeBarChartDataBoulders = new BarChartData();
         this.gradeBarChartDataBoulders.fromFirestore(data.gradeDistributionBarChartData?.boulders);
 
         this.openingHours = data.openingHours;
         this.gradeSystems = {
-            routes: getGradeSystem(data.gradeSystems.routes),
+            sportclimbing: getGradeSystem(data.gradeSystems.sportclimbing),
             bouldering: getGradeSystem(data.gradeSystems.bouldering)
         }
     }
@@ -63,12 +63,12 @@ export class Gym {
             name: this.name,
             openingHours: this.openingHours,
             gradeSystems: {
-                routes: this.gradeSystems.routes.gradeSystemName,
+                sportclimbing: this.gradeSystems.sportclimbing.gradeSystemName,
                 bouldering: this.gradeSystems.bouldering.gradeSystemName
             },
             gradeDistributionBarChartData: {
                 boulders: this.gradeBarChartDataBoulders.toFirestore(),
-                routes: this.gradeBarChartDataRoutes.toFirestore(),
+                sportclimbing: this.gradeBarChartDataSportclimbing.toFirestore(),
             },
         };
     }

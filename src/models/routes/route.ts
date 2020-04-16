@@ -24,7 +24,7 @@ interface IAverageData {
     total: number;
 }
 
-const routeTypes = [ "route", "boulder" ] as const;
+const routeTypes = [ "sportclimbing", "bouldering" ] as const;
 export type RouteType = typeof routeTypes[number];
 
 export interface IPostRouteData {
@@ -41,7 +41,7 @@ export interface IPostRouteData {
 }
 
 export interface IRouteData {
-    name?: string; // required if type === "route"
+    name?: string; // required if type === "sportclimbing"
     type: RouteType;
     sector: ISector;
     routeSetter: IRouteSetter;
@@ -63,7 +63,7 @@ export function validatePostRouteData(data: IPostRouteData): boolean {
 
     if (!routeTypes.includes(data.type)) return false;;
 
-    if (data.type === "route") {
+    if (data.type === "sportclimbing") {
         if (typeof(data.name) !== "string") return false;
         if (data.name?.length <= 0) return false;
     }
@@ -107,7 +107,7 @@ export class Route {
         
         this.name = data.name;
         this.type = data.type;
-        if (this.type === "route" && !this.name) throw new Error("Invalid argument.");
+        if (this.type === "sportclimbing" && !this.name) throw new Error("Invalid argument.");
 
         this.sector = data.sector;
         this._routeSetter = data.routeSetter;
