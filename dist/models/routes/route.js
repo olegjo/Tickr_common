@@ -25,9 +25,9 @@ function validatePostRouteData(data) {
         return false;
     if (((_b = data.gymId) === null || _b === void 0 ? void 0 : _b.length) <= 0)
         return false;
-    if (typeof (data.sectorId) !== "string")
+    if (typeof (data.wallId) !== "string")
         return false;
-    if (((_c = data.sectorId) === null || _c === void 0 ? void 0 : _c.length) <= 0)
+    if (((_c = data.wallId) === null || _c === void 0 ? void 0 : _c.length) <= 0)
         return false;
     if (!data.holds)
         return false;
@@ -46,10 +46,10 @@ class Route {
         this.type = data.type;
         if (this.type === "sportclimbing" && !this.name)
             throw new Error("Invalid argument.");
-        this.sector = data.sector;
+        this.wall = data.wall;
         this._routeSetter = data.routeSetter;
         this.gym = data.gym;
-        if (!this.sector || !this._routeSetter || !this.gym)
+        if (!this.wall || !this._routeSetter || !this.gym)
             throw new Error("Invalid argument.");
         if (util_1.isNullOrUndefined(data.holds)) {
             throw new Error("Invalid argument");
@@ -85,7 +85,7 @@ class Route {
         let ret = {
             name: this.name,
             type: this.type,
-            sector: this.sector,
+            wall: this.wall,
             routeSetter: this._routeSetter,
             gym: this.gym,
             difficulty: this.grade.toFirestore(),

@@ -4,7 +4,7 @@ import * as ClimbingGrades from "../../ClimbingGrades";
 import { isNullOrUndefined } from "util";
 import * as ClimbingHolds from "../../ClimbingHolds";
 
-interface ISector {
+interface IWall {
     id: string;
     name: string;
 };
@@ -32,7 +32,7 @@ export interface IPostRouteData {
     name?: string;
     grade: ClimbingGrades.IFirestoreClimbingGrade;
     gymId: string;
-    sectorId: string;
+    wallId: string;
     routesetter: {
         userId: string;
         name: string;
@@ -43,7 +43,7 @@ export interface IPostRouteData {
 export interface IRouteData {
     name?: string; // required if type === "sportclimbing"
     type: RouteType;
-    sector: ISector;
+    wall: IWall;
     routeSetter: IRouteSetter;
     gym: IGym;
     difficulty: ClimbingGrades.IFirestoreClimbingGrade;
@@ -71,8 +71,8 @@ export function validatePostRouteData(data: IPostRouteData): boolean {
     if (typeof(data.gymId) !== "string") return false;
     if (data.gymId?.length <= 0) return false;
 
-    if (typeof(data.sectorId) !== "string") return false;
-    if (data.sectorId?.length <= 0) return false;
+    if (typeof(data.wallId) !== "string") return false;
+    if (data.wallId?.length <= 0) return false;
 
     if (!data.holds) return false;
 
@@ -91,7 +91,7 @@ export class Route {
     
     readonly id?: string;
     
-    readonly sector: ISector;
+    readonly wall: IWall;
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
@@ -109,10 +109,10 @@ export class Route {
         this.type = data.type;
         if (this.type === "sportclimbing" && !this.name) throw new Error("Invalid argument.");
 
-        this.sector = data.sector;
+        this.wall = data.wall;
         this._routeSetter = data.routeSetter;
         this.gym = data.gym;
-        if (!this.sector || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
+        if (!this.wall || !this._routeSetter || !this.gym) throw new Error("Invalid argument.");
 
         if (isNullOrUndefined(data.holds)) {
             throw new Error("Invalid argument");
@@ -151,10 +151,10 @@ export class Route {
     }
 
     public toFirestore(): IRouteData {
-        let ret = {
+        let ret: IRouteData = {
             name: this.name,
             type: this.type,
-            sector: this.sector,
+            wall: this.wall,
             routeSetter: this._routeSetter,
             gym: this.gym,
             difficulty: this.grade.toFirestore(),

@@ -2,7 +2,7 @@ import { DocumentData } from "../../firestore_types";
 import { BarChartData, IBarChartDataItem } from "../../BarChartData";
 import * as ClimbingGrades from "../../ClimbingGrades";
 import * as ClimbingHolds from "../../ClimbingHolds";
-interface ISector {
+interface IWall {
     id: string;
     name: string;
 }
@@ -25,7 +25,7 @@ export interface IPostRouteData {
     name?: string;
     grade: ClimbingGrades.IFirestoreClimbingGrade;
     gymId: string;
-    sectorId: string;
+    wallId: string;
     routesetter: {
         userId: string;
         name: string;
@@ -35,7 +35,7 @@ export interface IPostRouteData {
 export interface IRouteData {
     name?: string;
     type: RouteType;
-    sector: ISector;
+    wall: IWall;
     routeSetter: IRouteSetter;
     gym: IGym;
     difficulty: ClimbingGrades.IFirestoreClimbingGrade;
@@ -57,7 +57,7 @@ export declare class Route {
     grade: ClimbingGrades.ClimbingGradeBase<any>;
     private _routeSetter;
     readonly id?: string;
-    readonly sector: ISector;
+    readonly wall: IWall;
     readonly gym: IGym;
     readonly type: RouteType;
     readonly originalGrade: ClimbingGrades.ClimbingGradeBase<any>;
