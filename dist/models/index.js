@@ -7,4 +7,5 @@ __export(require("./gyms/gym"));
 __export(require("./gyms/wall"));
 __export(require("./routes/route"));
 __export(require("./TickData"));
+__export(require("./users/user"));
 //# sourceMappingURL=index.js.map

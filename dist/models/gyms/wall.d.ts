@@ -7,6 +7,7 @@ export interface IWallData {
     type: WallType;
     height_meters: number;
     routeCount: number;
+    sector: string;
     gradeDistributionBarChartData?: IBarChartDataItem[];
 }
 export declare class Wall {
@@ -16,6 +17,7 @@ export declare class Wall {
     readonly type: WallType;
     readonly height: number;
     readonly name: string;
+    readonly sector: string;
     readonly routeCount: number;
     constructor(data: IWallData, id?: string);
     toFirestore(): IWallData;

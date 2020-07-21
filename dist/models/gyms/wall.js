@@ -7,7 +7,8 @@ class Wall {
         if (util_1.isNullOrUndefined(data.height_meters) ||
             util_1.isNullOrUndefined(data.name) ||
             util_1.isNullOrUndefined(data.type) ||
-            util_1.isNullOrUndefined(data.routeCount)) {
+            util_1.isNullOrUndefined(data.routeCount) ||
+            util_1.isNullOrUndefined(data.sector)) {
             throw new Error("Invalid argument");
         }
         this.id = id;
@@ -15,6 +16,7 @@ class Wall {
         this.height = data.height_meters;
         this.name = data.name;
         this.routeCount = data.routeCount;
+        this.sector = data.sector;
         this.gradeBarChartData = new BarChartData_1.BarChartData();
         this.gradeBarChartData.fromFirestore(data.gradeDistributionBarChartData);
     }
@@ -24,7 +26,8 @@ class Wall {
             height_meters: this.height,
             routeCount: this.routeCount,
             type: this.type,
-            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore()
+            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore(),
+            sector: this.sector,
         };
     }
     static toFirestore(data) {
