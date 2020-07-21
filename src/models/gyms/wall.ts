@@ -10,6 +10,7 @@ export interface IWallData {
     type: WallType;
     height_meters: number;
     routeCount: number;
+    sector: string;
 
     gradeDistributionBarChartData?: IBarChartDataItem[];
 }
@@ -23,6 +24,7 @@ export class Wall {
     readonly type: WallType;
     readonly height: number;
     readonly name: string;
+    readonly sector: string;
     readonly routeCount: number;
 
     constructor(data: IWallData, id?: string) {
@@ -30,7 +32,8 @@ export class Wall {
             isNullOrUndefined(data.height_meters) || 
             isNullOrUndefined(data.name) ||
             isNullOrUndefined(data.type) ||
-            isNullOrUndefined(data.routeCount)
+            isNullOrUndefined(data.routeCount) ||
+            isNullOrUndefined(data.sector)
         ) {
             throw new Error("Invalid argument");
         }
@@ -41,6 +44,7 @@ export class Wall {
         this.height = data.height_meters;
         this.name = data.name;
         this.routeCount = data.routeCount;
+        this.sector = data.sector;
 
         this.gradeBarChartData = new BarChartData();
         this.gradeBarChartData.fromFirestore(data.gradeDistributionBarChartData);
@@ -52,7 +56,8 @@ export class Wall {
             height_meters: this.height,
             routeCount: this.routeCount,
             type: this.type,
-            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore()
+            gradeDistributionBarChartData: this.gradeBarChartData.toFirestore(),
+            sector: this.sector,
         };
     }
 
