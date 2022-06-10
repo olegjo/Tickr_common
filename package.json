@@ -11,7 +11,7 @@
   "main": "dist/index.js",
   "dependencies": {
     "@types/node": "^13.11.1",
-    "util": "^0.12.2"
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "tslint": "^5.20.1",
