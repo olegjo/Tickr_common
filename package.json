@@ -10,7 +10,7 @@
   },
   "main": "dist/index.js",
   "dependencies": {
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.52",
     "util": "^0.12.2"
   },
   "devDependencies": {
